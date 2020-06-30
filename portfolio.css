@@ -28,7 +28,7 @@ p {
 	font-size: 12pt;
 }
 
-.item {
+.child {
 	float: center;
 	border-radius: 20px;
 	border:2px solid #000;
@@ -40,7 +40,7 @@ p {
 	background-color: rgba(255, 255, 255, 0.9);
 }
 
-.center{
+.parent{
 	text-align: center;
 	margin-top: 120px;
 	margin-left: 10%;
