@@ -26,6 +26,9 @@ header {
 p {
 	line-height: 18pt;
 	font-size: 12pt;
+	text-align: left;
+	width: 90%;
+	margin-left: 5%;
 }
 
 .child {
@@ -57,6 +60,10 @@ p {
 	top:0;
 	left: 0;
 	z-index: 1;
+}
+
+.link {
+	text-align: center;
 }
 
 footer{
