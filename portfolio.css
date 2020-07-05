@@ -11,6 +11,7 @@ body {
 
 h1,h2,h3,h4,h5,h6 {
 	text-align: center;
+	margin-bottom: 12px;
 }
 
 header {
@@ -20,7 +21,6 @@ header {
 	width: 97.5%;
 	left: 2.5%;
 	right: 2.5%;
-	margin-bottom: 20px;
 }
 
 p {
@@ -31,26 +31,104 @@ p {
 	margin-left: 5%;
 }
 
+.topnav {
+	overflow: hidden;
+	background-color:  rgba(255, 255, 255, 0.9);
+	margin-bottom: 80px;
+}
+
+.topnav a {
+	float: left;
+	display: block;
+	text-align: center;
+	padding: 15px;
+	text-decoration: none;
+	color: black;
+}
+
+.topnav a:hover {
+	background-color: #333;
+	color: white;
+}
+
+.topnav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.topnav li {
+	float: left;
+}
+
 .child {
 	float: center;
 	border-radius: 20px;
 	border:2px solid #000;
-	margin-right: 5px;
+	margin-right: 10px;
 	width: 100%;
 	margin-bottom: 20px;
 	position: relative;
 	align-items: center;
 	background-color: rgba(255, 255, 255, 0.9);
+	min-width: 200px;
+	min-height: 450px;
+}
+.child:hover {
+	background-color: rgba(255, 255, 255, 1);	
+}
+
+section {
+	opacity: 0;
+	transform: translate(0,40px);
+	transition: all 1s;
+}
+
+.column {
+	float: left;
+	width: 48%;
+}
+
+.row::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+@media screen and (max-width: 840px) {
+	.column {
+		width: 100%;
+	}
+}
+
+.container {
+	position: relative;
+	margin-bottom: -15px;
+	margin-top: 15px;
+}
+
+.vertical-align{
+	margin: 0;
+	position: relative;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
 }
 
 .parent{
 	text-align: center;
-	margin-top: 120px;
-	margin-left: 10%;
-	margin-right:10%;
+	margin-top: 40px;
+	margin-left: 5%;
+	margin-right:5%;
 	justify-content: center;
 	align-items: center;
 	position: relative;
+	margin-bottom: 40px;
+}
+
+section.visible {
+	opacity: 1;
+	transform: translate(0,0);
 }
 
 .linkify {
@@ -72,4 +150,12 @@ footer{
 	padding: 20px;
 	width: 97.5%;
 	left: 2.5%;
+}
+
+ul {
+	text-align: left;
+	width: 90%;
+	margin-left: 5%;
+	line-height: 18pt;
+	font-size: 12pt;
 }
