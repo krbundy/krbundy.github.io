@@ -74,9 +74,7 @@ p {
 	min-width: 200px;
 	min-height: 480px;
 }
-.child:hover {
-	background-color: rgba(255, 255, 255, 1);	
-}
+
 
 section {
 	opacity: 0;
