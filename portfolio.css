@@ -160,6 +160,6 @@ ul {
 	font-size: 12pt;
 }
 
-li {
+.child li {
 	width: 90%;
 }
