@@ -159,3 +159,7 @@ ul {
 	line-height: 18pt;
 	font-size: 12pt;
 }
+
+li {
+	width: 90%;
+}
