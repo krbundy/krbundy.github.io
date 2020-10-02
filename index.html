@@ -1,148 +1,246 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
+
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-	<title>Ken Bundy - Data Science Portfolio</title>
-	<meta name="description" content="A portfolio of data scince projects by Kenneth Bundy.">
-	<link rel="stylesheet" type = "text/css" href = "portfolio.css" media = "screen"/>
-	<script src="jquery.js"></script>
-	<script src="animations.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="A Data Science and Machine Learning Portfolio for Kenneth Bundy">
+  <meta name="author" content="Kenneth Bundy">
+
+  <title>Kenneth Bundy - Portfolio</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom Fonts -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="css/stylish-portfolio.css" rel="stylesheet">
+
 </head>
-<body>
-	<header>
-			<h1>Kenneth  Bundy</h1>
-			<h2>Data Science Projects</h2>
-	</header>
-	<div class="topnav">
-		<ul>
-			<li><a href="./about.html">About</a></li>
-			<li><a href="https://krbundy.github.io/">Portfolio</a></li>
-			<li><a href="https://linkedin.com/in/kennethrbundy">LinkedIn</a></li>
-			<li><a href="mailto://kenneth.bundy@maine.edu">Email</a></li>
-		</ul>
-	</div>
-	<div class = "parent row">
-		<section id="webscraping" class="visible">
-			<div class = "child column">
-				<h2>Data Mining with R and Selenium</h2><br>
-				<div class="container row">
-					<div class="vertical-align column">
-						<img width=25% src=./R.png alt="R Programming Language">
-					</div>
-					<div class="vertical-align column"><img width=25% src="./selenium.png" alt="Selenium Websrcaping tool"></div>
-				</div>
-					<p>
-						This project downloaded the text of about 120,000 comments on proposed Title IX rules changes from the US Department of Education website.  This data was then used by researchers at George Washington University to determine public sentiment about the rules changes and extract the comments with legal arguments.  
-					</p>
-					<p class="link">
-						<a href = "https://github.com/krbundy/TitleIX-Webscraping">Source Code on GitHub<span class = "linkify"></span></a>
-					</p>
-					<p></p>
-				</div>
-		</section>
-		<section id="ml2" class="visible">
-			<div class = "child hidden column">
-				<h2>Multi-Agent Reinforcement Learning using PyTorch</h2><br>
-				<div class="container row">
-					<div class="vertical-align column">
-						<img width=50% src=./python.png alt="Python Programming Language">
-					</div>
-					<div class="vertical-align column"><img width=50% src="./pytorch.png" alt="PyTorch Machine Learning"></div>
-				</div>
-				<p>This is a multi-agent Reinforcement learning project with the Wireless Sensor networks Laboratory (WiSe-Net) at the University of Maine, Orono.  This project uses, in its current iteration, multiple deep Q networks to control wireless traffic routing in star networks.  The code is extensible to many agents, though convergence issue may appear for very large numbers of nodes.  Further work improving network performance and experimenting with inverse Reinforcement learning approaches is ongoing.  
-				</p>
-				<p class="link">
-					<a href = "./routing.html">More Information<span class = "linkify"></span></a>
-				</p>
-				<p></p>
-			</div>
-		</section>
-		
-	</div>
-	<div class="parent row">
-		<section id="ml1">
-			<div class = "child column">
-				<h2>Time Series Prediction with Python and TensorFlow</h2><br>
-				<div class="container row">
-					<div class="vertical-align column">
-						<img width=50% src=./python.png alt="Python Programming Language">
-					</div>
-					<div class="vertical-align column"><img width=20% src="./Tensorflow.png" alt="TensorFlow Machine Learning"></div>
-				</div>
-				<p>
-					This Jupyter Notebook creates a number of models to predict the incoming solar radiation on a solar panel.  The models include baselines like repeating the most recent observation, TBATS (Trigonometric, Box-Cox, Autoregrssive Moving Average with Trend and Seasonality), and multiple LSTM (Long Short Term Memory) models of different breadth and depth. 
-				</p>
-				<p class="link">
-					<a href = "https://github.com/krbundy/SolarRadiationPrediction">Source Code on GitHub<span class = "linkify"></span></a>
-				</p>
-				<p></p>
-			</div>
-		</section>
-		<section id="ml3">
-			<div class = "column child">
-				<h2>
-					Wireless Communication Channel State Modeling with Deep Learning in MATLAB
-				</h2><br>
-				<div class="container">
-					<div class="vertical-align">
-						<img width=12% src=./matlab.png alt="Mathworks MATLAB">
-					</div>
-				</div>
-				<p>
-					This script is used to predict the channel state in a wireless communication channel.  This allows the node to save power by not transmitting data when the transmission will not reach its intended target.  
-				</p>
-				<p class="link">
-					<a href = "https://github.com/krbundy/LSTMChannelStateEstimation">Source code on GitHub<span class="linkify"></span></a>
-				</p>
-				<p></p>
-			</div>
-		</section>
-	</div>
-	<div class = "parent row">
-		<section id="flask1">
-			<div class = "hidden column child">
-				<h2>Student Grade Calculator using Python, Flask, and Microsoft Azure</h2><br>
-				<div class="container row">
-					<div class="vertical-align column">
-						<img width=50% src=./flask.png alt="Flask Web Development">
-					</div>
-					<div class="vertical-align column"><img width=50% src="./azure.png" alt="Microsoft Azure"></div>
-				</div>
-				<p>
-					When you are teaching, there is a real problem: students don't understand weighted averages.  Most college freshmen are not able to compute their grade from the course syllabus.  To address this, I created a grade calculator for the MAT 116 course at the University of Maine, Orono.  
-				</p>
-				<p class="link">
-					<a href="https://github.com/krbundy/GradeApp116">Source Code on GitHub<span class="linkify"></span></a>
-				</p>
-				<p></p>
-			</div>
-		</section>
-		<section id="regression">
-			<div class="child column">
-				<h2>Regression Models on Gender-based Wage Desrimination</h2><br>
-				<div class="container">
-					<div class="vertical-align">
-						<img width=12% src="./R.png" alt="R Programming Language">
-					</div>
-				</div>
-				<p>
-					Since my University publishes the salaries of all its employees, naturally I want to know whether they are being fair.  So, I set off on a quest to find out.  This lead me to:
-				</p>
-				<ul>
-					<li>Download the (pdf) of salary information and clean the data</li>
-					<li>Cross-reference all of the given names against US Census data to assign a gender to each employee,</li>
-					<li>Use a regression-based model to look for pay differences between men and women</li>
-				</ul>
-				<p class="link">
-					<a href = "https://github.com/krbundy/WageRegression">Source Code on GitHub<span class="linkify"></span></a>
-				</p>
-			</div>
-		</section>
-	</div>
-	<footer>
-		<p>
-			Contact: <a href="mailto://kenneth.bundy@maine.edu">kenneth.bundy@maine.edu</a>
-		</p>
-	</footer>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a class="js-scroll-trigger" href="#page-top">Kenneth Bundy</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#page-top">Home</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#portfolio">Portfolio</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#resume">Resume</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#services">Services</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#contact">Contact</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead d-flex">
+    <div class="container text-center my-auto">
+      <h1  class="mb-1">Portfolio</h1>
+      <h3 class="mb-5">
+        <em>Machine Learning Projects by Kenneth Bundy</em>
+      </h3>
+    </div>
+    <div class="overlay"></div>
+  </header>
+
+
+
+  <!-- Portfolio -->
+  <section class="content-section" id="portfolio">
+    <div class="container">
+      <div class="content-section-heading text-center">
+        <h3 class="text-secondary mb-0">Portfolio</h3>
+        <h2 class="mb-5">Recent Projects</h2>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="./connect4.html">
+            <div class="caption">
+              <div class="caption-content">
+                <div class="h2">Play Connect-4 against AI</div>
+                <p class="mb-0">Play against a MCTS-powered oppenent (like AlphaGo Zero) trained on </p>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio-1.jpg" alt="robot">
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="#!">
+            <div class="caption">
+              <div class="caption-content">
+                <div class="h2">Wage Descrimination</div>
+                <p class="mb-0">Investigating Wage Descrimination at the University of Maine</p>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio-2.jpg" alt="Woman Texting on cell phone">
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="./routing.html">
+            <div class="caption">
+              <div class="caption-content">
+                <div class="h2">Reinforcement Learning for Network Control</div>
+                <p class="mb-0">My current work at the Wireless Sensor Networks Laboratory</p>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio-3.jpg" alt="Cellular communication tower at night">
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="https://colab.research.google.com/drive/1RYUBNIQ2FB6K8Jv7MBd7-5_b78UDaAUD?usp=sharing">
+            <div class="caption">
+              <div class="caption-content">
+                <div class="h2">Time Series Forecasting</div>
+                <p class="mb-0">Predicting incoming solar radiation with statistics and deep learning (Google Colab)</p>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio-4.jpg" alt="JavaScript code">
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="content-section bg-primary text-white text-center" id="services">
+    <div class="container">
+      <div class="content-section-heading">
+        <h3 class="text-secondary mb-0">Specialities</h3>
+        <h2 class="mb-5">From New Models to Deployment</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="icon-power"></i>
+          </span>
+          <h4>
+            <strong>Deep Learning</strong>
+          </h4>
+          <p class="text-faded mb-0">from scratch if needed, but usually using PyTorch or TensorFlow/Keras</p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="icon-cloud-upload"></i>
+          </span>
+          <h4>
+            <strong>AI to the Cloud</strong>
+          </h4>
+          <p class="text-faded mb-0">HTML/CSS and Cloud/AWS Expertise to deploy Models</p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="icon-trophy"></i>
+          </span>
+          <h4>
+            <strong>Reinforcement Learning</strong>
+          </h4>
+          <p class="text-faded mb-0">Including multi-agent control</p>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="icon-book-open"></i>
+          </span>
+          <h4>
+            <strong>Curiosity</strong>
+          </h4>
+          <p class="text-faded mb-0">I love learning new things and playing with the latest technology</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- About -->
+    <section class="content-section bg-light" id="resume">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <h2>If you would like to learn more about me, you can download my resume <br><br></h2>
+            <a class="btn btn-dark btn-xl js-scroll-trigger" href="resume.pdf">Download</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- Callout -->
+  <section class="callout">
+    <div class="container text-center">
+      <h2 class="mx-auto mb-5">Find me on Social Media<br><br></h2>
+      <!--<a class="btn btn-primary btn-xl" href="https://startbootstrap.com/themes/stylish-portfolio/">Download</a>-->
+    </div>
+  </section>
+
+  
+
+  <!-- Call to Action 
+  <section class="content-section bg-primary text-white">
+    <div class="container text-center">
+      <h2 class="mb-4">The buttons below are impossible to resist...</h2>
+      <a href="#!" class="btn btn-xl btn-light mr-4">Click Me!</a>
+      <a href="#!" class="btn btn-xl btn-dark">Look at Me!</a>
+    </div>
+  </section>
+-->
+
+
+  <!-- Footer -->
+  <footer class="footer text-center">
+    <div class="container">
+      <ul class="list-inline mb-5">
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white mr-3" href="https://facebook.com/kenneth.bundy">
+            <i class="icon-social-facebook"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white mr-3" href="http://twitter.com">
+            <i class="icon-social-twitter"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white" href="http://krbundy.github.io">
+            <i class="icon-social-github"></i>
+          </a>
+        </li>
+      </ul>
+      <p class="text-muted small mb-0">Copyright &copy; Kenneth R Bundy 2020</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/stylish-portfolio.min.js"></script>
+
 </body>
+
 </html>

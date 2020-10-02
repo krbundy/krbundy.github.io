@@ -1,42 +1,90 @@
 <!DOCTYPE html>
-<html lang="en-us">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-	<title>Deep Learning Routing</title>
-	<link rel="stylesheet" type = "text/css" href = "portfolio-page.css" media = "screen"/>
-</head>
-<body>
-    <div class="topnav">
-		<ul>
-			<li><a href="./about.html">About</a></li>
-			<li><a href="https://krbundy.github.io/">Portfolio</a></li>
-			<li><a href="mailto://kenneth.bundy@maine.edu">Email</a></li>
-			<li><a href="https://linkedin.com/in/kennethrbundy">LinkedIn</a></li>
-		</ul>
-	</div>
-    <div class="parent">
-        <div class="child">
-            <h1>Routing Sensor Data with Multi-Actor Reinforcement Learning</h1><br>
-            <p>
-                As part of the Wireless Sensor Networks Laboratory (WiSe-Net Lab), I am working to develop artificially intelligent agents that can control the traffic in a wireless sensor network.  Issues regarding packet forwarding, battery management, and coordination of the nodes makes it a challenging problem.  
-            </p>
-            <p>
-                Specifically, we are focusing on a star network configuration, and adding layers of complexity as we progress.  Specifically, we model the nodes' decision of whether to transmit data as a Marcov Decision Process.  However, none of the nodes can observe the network state, only their own state, and what they overhear through the wireless radio.  This means that this is a multi-agent, partially observable Marcov Decision Process, one of the biggest challenges in Reinforcement Learning (RL).
-            </p>
-            <p>
-                In order to address this challenge, we are using a distributed Deep Q Network (DQN) for routing the packets.  We have been able to demonstrate Q-learning, the most basic type of RL, for small amounts of network traffic.  However, as the network traffic increases, the state space becomes too large to continue with that approach.  Instead, we model the nodes individually and train a separate DQN for each node. 
-            </p>
-            <img src="ep1_losses_run4.png" alt="Loss Function for multi-agent Reinforcement Learning">
-            <p>
-                So far, we are able to model convergence, but the solutions that the agents obtain are not yet optimal.  That is, the nodes are able to coordinate their transmissions, but not in an optimal way.  One common problem is single nodes dominating the conversation, while the other nodes remain silent.  We are adjusting the reward structure to aleviate this, but this work is still ongoing.  
-            </p>
-            <p>
-                Our current approah uses multiple DQN to address the challenge, but there are a number of other approaches we are working on, including using an Asynchronous Advantage Actor-Critic (A3C) (or some other policy based method, like PPO/TRPO) trained from the whole network state, and then using a Inverse Reinforcement Learning approach to train to nodes to follow the optimal solution at scale.  
-            </p>
-            <p>
-                This work is ongoing, and we hope to publish by the end of the year. 
-            </p>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Kenneth Bundy - Network Routing with Deep Learning</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+       
+          <!-- Bootstrap Core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+        <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="css/stylish-portfolio.css" rel="stylesheet">
+    </head>
+    <body id="page-top">
+          <!-- Navigation -->
+  <a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a class="js-scroll-trigger" href="#page-top">Kenneth Bundy</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#page-top">Home</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="./index.html#portfolio">Portfolio</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#about">About</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#services">Services</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#contact">Contact</a>
+      </li>
+    </ul>
+  </nav>
+  
+    <!-- header -->
+    <header class="jumbotron bg-light align-items-lg-center">
+        <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+            <h1 style="color:white !important" >Routing with Machine Learning<br>
+              <small>Improving Wireless Sensor Networks with Deep Learning</small>
+            </h1>
+            </div>
         </div>
-    </div>
-</body>
+        </div>
+    </header>
+
+    <section class="page-section">
+        <div class="container-fluid text-center align-content-center">
+          <img src="img/LSTM2_s3 - Copy.svg">
+          <p>
+            
+          
+          </p>
+        </div>
+    </section>
+        
+
+
+
+       <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+
+  <!-- Custom scripts for this template -->
+  <script src="js/stylish-portfolio.min.js"></script>
+
+    </body>
 </html>

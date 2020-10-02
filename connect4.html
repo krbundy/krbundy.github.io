@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Kenneth Bundy - Play Connect-4</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+       
+          <!-- Bootstrap Core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+        <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="css/stylish-portfolio.css" rel="stylesheet">
+    </head>
+    <body id="page-top">
+          <!-- Navigation -->
+  <a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a class="js-scroll-trigger" href="#page-top">Kenneth Bundy</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="./index.html">Home</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="./index.html#portfolio">Portfolio</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#about">About</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#services">Services</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#contact">Contact</a>
+      </li>
+    </ul>
+  </nav>
+  
+    <!-- header -->
+    <header class="jumbotron bg-light align-items-lg-center">
+        <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+            <h1 style="color:white !important" >Connect-4 with AI<br>
+              <small>Play Connect-4 with an advanced AI modeled on AlphaGo-Zero (MCTS developed by Google DeepMind)</small>
+            </h1>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <section class="page-section">
+        <div class="container-fluid text-center align-content-center">
+          <div class="text-center" id="#result"> </div>
+            <div id="colorTurn" class="text-center">Click to Start</div>
+            <div id="grid">
+                <!-- axios for HTTP requests to the AI API-->
+                <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                <!-- game script -->
+                <script src="js/connect-4.js"></script>
+                <div class="connect-4 text-center row">
+                    <div class="connect-4 cell" id="cell00" onclick="selectColumn(0)"></div>
+                    <div class="connect-4 cell" id="cell01" onclick="selectColumn(1)"></div>
+                    <div class="connect-4 cell" id="cell02" onclick="selectColumn(2)"></div>
+                    <div class="connect-4 cell" id="cell03" onclick="selectColumn(3)"></div>
+                    <div class="connect-4 cell" id="cell04" onclick="selectColumn(4)"></div>
+                    <div class="connect-4 cell" id="cell05" onclick="selectColumn(5)"></div>
+                    <div class="connect-4 cell" id="cell06" onclick="selectColumn(6)"></div>
+                </div>
+                <div class="connect-4 row">  
+                    <div class="connect-4 cell" id="cell10" onclick="selectColumn(0)"></div>
+                    <div class="connect-4 cell" id="cell11" onclick="selectColumn(1)"></div>
+                    <div class="connect-4 cell" id="cell12" onclick="selectColumn(2)"></div>
+                    <div class="connect-4 cell" id="cell13" onclick="selectColumn(3)"></div>
+                    <div class="connect-4 cell" id="cell14" onclick="selectColumn(4)"></div>
+                    <div class="connect-4 cell" id="cell15" onclick="selectColumn(5)"></div>
+                    <div class="connect-4 cell" id="cell16" onclick="selectColumn(6)"></div>
+                </div>
+                <div class="connect-4 row">  
+                    <div class="connect-4 cell" id="cell20" onclick="selectColumn(0)"></div>
+                    <div class="connect-4 cell" id="cell21" onclick="selectColumn(1)"></div>
+                    <div class="connect-4 cell" id="cell22" onclick="selectColumn(2)"></div>
+                    <div class="connect-4 cell" id="cell23" onclick="selectColumn(3)"></div>
+                    <div class="connect-4 cell" id="cell24" onclick="selectColumn(4)"></div>
+                    <div class="connect-4 cell" id="cell25" onclick="selectColumn(5)"></div>
+                    <div class="connect-4 cell" id="cell26" onclick="selectColumn(6)"></div>
+                </div>
+                <div class="connect-4 row">  
+                    <div class="connect-4 cell" id="cell30" onclick="selectColumn(0)"></div>
+                    <div class="connect-4 cell" id="cell31" onclick="selectColumn(1)"></div>
+                    <div class="connect-4 cell" id="cell32" onclick="selectColumn(2)"></div>
+                    <div class="connect-4 cell" id="cell33" onclick="selectColumn(3)"></div>
+                    <div class="connect-4 cell" id="cell34" onclick="selectColumn(4)"></div>
+                    <div class="connect-4 cell" id="cell35" onclick="selectColumn(5)"></div>
+                    <div class="connect-4 cell" id="cell36" onclick="selectColumn(6)"></div>
+                </div>
+                <div class="connect-4 row">
+                    <div class="connect-4 cell" id="cell40" onclick="selectColumn(0)"></div>
+                    <div class="connect-4 cell" id="cell41" onclick="selectColumn(1)"></div>
+                    <div class="connect-4 cell" id="cell42" onclick="selectColumn(2)"></div>
+                    <div class="connect-4 cell" id="cell43" onclick="selectColumn(3)"></div>
+                    <div class="connect-4 cell" id="cell44" onclick="selectColumn(4)"></div>
+                    <div class="connect-4 cell" id="cell45" onclick="selectColumn(5)"></div>
+                    <div class="connect-4 cell" id="cell46" onclick="selectColumn(6)"></div>
+                </div>
+                <div class="connect-4 row">
+                    <div class="connect-4 cell" id="cell50" onclick="selectColumn(0)"></div>
+                    <div class="connect-4 cell" id="cell51" onclick="selectColumn(1)"></div>
+                    <div class="connect-4 cell" id="cell52" onclick="selectColumn(2)"></div>
+                    <div class="connect-4 cell" id="cell53" onclick="selectColumn(3)"></div>
+                    <div class="connect-4 cell" id="cell54" onclick="selectColumn(4)"></div>
+                    <div class="connect-4 cell" id="cell55" onclick="selectColumn(5)"></div>
+                    <div class="connect-4 cell" id="cell56" onclick="selectColumn(6)"></div>
+                </div>
+            </div>
+            <div class="container text-center align-content-center">
+                <input id="resetButton" type="button" class ="btn btn-primary btn-xl" value="New Game" onclick="resetGrid()" />  
+                <button id="aboutButton" type="button" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#AboutModal">About This Page</button>
+            </div>
+            
+        </div>
+    </section>
+
+    
+<!-- about Modal -->
+<div id="AboutModal" class="modal fade" role="dialog">
+  <div class="modal-lg modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">About this game</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button> 
+      </div>
+      <div class="modal-body">
+        <p>
+          The model was created to serve as a demonstration for the Wireless Sensor Networks Laboratory at the University of Maine.   In that way, the Connect-4 AI was not intended to be superhuman – we wanted people to have a good experience while playing it.  Since many of our demonstrations (before COVID-19, at least) were to children and teenagers, we did not want to create an AI that would win every time.  This AI has played about 35,000 games, and I would expect it to take another 150,000 games to exceed human levels of skill.  <br>
+        </p>
+        <p>
+          This game was developed using a Monte Carlo Tree Search (MCTS) algorithm, the same one that powers Google DeepMind’s AlphaGo Zero.  This implementation is based on Maxim Lapan’s book, “Deep Reinforcement Learning Hands-On.”  This model, he notes, gets pretty good in this amount of training, and should exceed human capabilities in about 180,000 games.
+          <br></p>
+        <img src="img\architecture.JPG" width=100%>
+        <p>
+          The basic application is broken into a front-end and back-end. The front end consists of the website (HTML and CSS with Bootstrap) and JavaScript, and the backend is a RESTful API hosted on Amazon Web Services (AWS) Elastic Beanstalk. 
+        </p>
+        <p>
+          The AWS Backend is written in Python using Flask to create an API.  The board state is sent from the client to the AWS Elastic Compute (EC2) instance powering the application using a POST API call, and then the server replies with the updated state.  This is then rendered on the website.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+      
+<!-- Yellow Player Wins Modal -->
+<div id="yellowModal" class="modal fade" role="dialog">
+  <div class="modal-lg modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">You Win!</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button> 
+      </div>
+      <div class="modal-body">
+       <p>Nice Work!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Red Player Wins Modal -->
+<div id="redModal" class="modal fade" role="dialog">
+  <div class="modal-lg modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">AI Wins!</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button> 
+      </div>
+      <div class="modal-body">
+        <p>Better Luck Next Time!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+       <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+
+  <!-- Custom scripts for this template -->
+  <script src="js/stylish-portfolio.min.js"></script>
+
+    </body>
+</html>
