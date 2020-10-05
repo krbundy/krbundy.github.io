@@ -2,7 +2,8 @@
 
 //www.101Computing.net/connect4-challenge/
 
-const API_TARGET_ADDRESS = "http://Connect4Portfolio-env.eba-crvratrt.us-east-1.elasticbeanstalk.com/api";
+const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
+const API_TARGET_ADDRESS = "https://connect4api.kennethbundy.com/";
 var human_player = 1;
 var player=1; //1 for Yellow, 2 for Red
 var grid = [

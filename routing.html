@@ -51,6 +51,8 @@
     <!-- header -->
     <header class="jumbotron bg-light align-items-lg-center">
         <div class="container text-center">
+  
+
         <div class="row">
             <div class="col-lg-10 mx-auto">
             <h1 style="color:white !important" >Routing with Machine Learning<br>
@@ -62,7 +64,57 @@
     </header>
 
     <section class="page-section">
-        <div class="container-fluid text-center align-content-center">
+        <div class="container-fluid align-content-center">
+          <div class="container text-left">
+            <h2 class="text-center">
+              What are Wireless Sensor Networks?
+            </h2>
+            <p>
+              Wireless sensor networks consist of a distributed collection of ‘nodes’ with attached sensors that exchange data using wireless communication (radios – just not the kind you listen(ed) to in your car).  An example in agriculture would be to use a series of soil moisture sensors with attached short-range radios to measure the amount of water needed in a farmer’s field.  There are many ways of setting up these networks.  Many include a base station – a node with more computing resources and a bigger power supply that can store or transmit the data using a cellular data connection.
+            </p>
+            <p>
+              Currently, I am working on developing AI systems as part of the research team on a National Science Foundation (NSF) grant.  This project focuses on using low-cost wireless sensors for forest health monitoring and research.  This will allow researchers to better understand forest growth dynamics, and monitor threats for forest integrity like droughts and disease.
+            </p>
+            <p>
+              My work in this project has been in applications of AI to control the wireless sensor network.  This includes the following:
+            </p>
+            <ol>
+              <li>
+                How should the network traffic (transmissions) be scheduled? 
+              </li>
+              <li>
+                When a node could talk to multiple other nodes, which one should it send information to?
+              </li>
+              <li>
+                Will the node have enough power to continue operating if its battery is low?  Should I do something to conserve it, or will there be enough incoming solar power to recharge it?
+              </li>
+            </ol>
+            <h2 class="text-center">
+              Routing Patterns
+            </h2>
+            <p>
+              In order to discuss routing patterns, we need to consider the network architecture; in other words, which nodes are in range of one another, and where does the information need to go.  
+            </p>
+            <p>
+              These decisions are critical to the network – if one node is constantly relaying transmissions from one node to another, it’s battery will die, and the network won’t be able to function.  Instead, we need to distribute traffic fairly across the network.
+            </p>
+            <p>
+              In order to do this, there are many approaches using game theory, and there are a number of great results about using game theory determine a routing pattern.  However, finding the optimal pattern remains difficult because of incomplete information.  
+            </p>
+            <p>
+              To address this, we propose using reinforcement learning.  We develop a simulation environment and train a ‘self-driving packet’ to drive around the network (represented by a graph of connected nodes).  The only required information for this is the network architecture – that is, which nodes can connect to which other nodes. 
+            </p>
+            <p>
+              For small networks, this can be done with tabular learning (basic Q-Learning).  For larger networks, we are developing Categorical (Dueling) DQN, MCTS (M-Walk), and policy-based (like A2C) for traversal of the network graph.  These have the advantage of giving a probability distribution for the network path, meaning that the traffic will be spread across multiple relays.  
+            </p>
+            <p>
+              For mesh networks, where there are multiple sources and destinations in the network, we use Hindsight Experience Replay (HER) to overcome sparse rewards and train the network. Otherwise the packet wanders aimlessly around the network a lot.  HER makes things go much more smoothly.  
+            </p>
+            <p>
+              Now, running deep neural nets on a sensor node is not feasible – instead, we cache the outputs (or row of our table for tabular learning) to create a few probability distributions for the nodes’ transmissions.  Since each node has only a few sensor nodes connected to it, we can create the probability of transmitting to each connected node, and then transmit to one at random.  This cached approach use the same computational complexity as other approaches (or less, because there is no message passing between nodes to coordinate it).
+            </p>
+
+          </div>
           <img src="img/LSTM2_s3 - Copy.svg">
           <p>
             
