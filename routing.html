@@ -93,27 +93,34 @@
               Routing Patterns
             </h2>
             <p>
-              In order to discuss routing patterns, we need to consider the network architecture; in other words, which nodes are in range of one another, and where does the information need to go.  
-            </p>
-            <p>
-              These decisions are critical to the network – if one node is constantly relaying transmissions from one node to another, it’s battery will die, and the network won’t be able to function.  Instead, we need to distribute traffic fairly across the network.
-            </p>
-            <p>
-              In order to do this, there are many approaches using game theory, and there are a number of great results about using game theory determine a routing pattern.  However, finding the optimal pattern remains difficult because of incomplete information.  
+              In order to discuss routing patterns, we need to consider the network architecture; in other words, which nodes are in range of one another, and where does the information need to go.  These decisions are critical to the network – if one node is constantly relaying transmissions from one node to another, it’s battery will die, and the network won’t be able to function.  Instead, we need to distribute traffic fairly across the network.
             </p>
             <p>
               To address this, we propose using reinforcement learning.  We develop a simulation environment and train a ‘self-driving packet’ to drive around the network (represented by a graph of connected nodes).  The only required information for this is the network architecture – that is, which nodes can connect to which other nodes. 
             </p>
             <p>
-              For small networks, this can be done with tabular learning (basic Q-Learning).  For larger networks, we are developing Categorical (Dueling) DQN, MCTS (M-Walk), and policy-based (like A2C) for traversal of the network graph.  These have the advantage of giving a probability distribution for the network path, meaning that the traffic will be spread across multiple relays.  
-            </p>
-            <p>
-              For mesh networks, where there are multiple sources and destinations in the network, we use Hindsight Experience Replay (HER) to overcome sparse rewards and train the network. Otherwise the packet wanders aimlessly around the network a lot.  HER makes things go much more smoothly.  
+              For small networks, this can be done with tabular learning (basic Q-Learning).  For larger networks, we are developing Categorical (Dueling) DQN, MCTS (M-Walk), and policy-based (like A2C) for traversal of the network graph.  These have the advantage of giving a probability distribution for the network path, meaning that the traffic will be spread across multiple relays.  For the off-policy methods, we use Hindsight Experience Replay (HER) to overcome sparse rewards and train the network. 
             </p>
             <p>
               Now, running deep neural nets on a sensor node is not feasible – instead, we cache the outputs (or row of our table for tabular learning) to create a few probability distributions for the nodes’ transmissions.  Since each node has only a few sensor nodes connected to it, we can create the probability of transmitting to each connected node, and then transmit to one at random.  This cached approach use the same computational complexity as other approaches (or less, because there is no message passing between nodes to coordinate it).
             </p>
-            <img src="img/LSTM2_s3 - Copy.svg" style="text-align: center;">
+            <h2 class="text-center">
+              Experiments
+            </h2>
+            <p>
+              Below are a few experiments you can run on Google Colaboratory.  These range from complete experiments to algorithm tests.  
+            </p>
+            <h5>
+              <a href="https://drive.google.com/file/d/1ibOWoDN8EM4Y2rAkx6mVtuQzQN8xQsyN/view?usp=sharing" target="_blank">Asynchronous Actor Critic for Network Control</a>
+            </h5>
+            <p>
+              This experiment did not work so well - it learns a sub-optimal policy.  However, it's self contained and you see how the experiment works.
+            </p>
+            <h5>
+              <a href="#!" target="_blank">Star Network Control an routing optimization</a>
+            </h5>
+            <p>This experiment takes several hours to run, but compares the efficacy of three different methods for scheduling traffic in small networks with one base station and no relays.</p>
+            
           </div>
           
           <p>
