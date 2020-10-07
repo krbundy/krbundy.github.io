@@ -34,7 +34,7 @@ var config = {
 function checkWinner(){
     let winner = null;
 
-    for(var i=0;i< columns;i++){
+    for(var i=0;i<= columns;i++){
         for(var j=rows; j>0;j--){
 
             //check rows (and make sure not out of bounds)

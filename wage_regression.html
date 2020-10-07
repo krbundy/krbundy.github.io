@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Kenneth Bundy - Play Connect-4</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+       
+          <!-- Bootstrap Core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+        <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="css/stylish-portfolio.css" rel="stylesheet">
+    </head>
+    <body id="page-top">
+          <!-- Navigation -->
+  <a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a class="js-scroll-trigger" href="#page-top">Kenneth Bundy</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#page-top">Home</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#portfolio">Portfolio</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#about">About</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#services">Services</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#contact">Contact</a>
+      </li>
+    </ul>
+  </nav>
+  
+    <!-- header -->
+    <header class="jumbotron bg-light align-items-lg-center">
+        <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+            <h1 style="color:white !important" >Wage Descrimination<br>
+              <small>Does my University Descriminate against Female Employees?</small>
+            </h1>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <section class="page-section">
+        <div class="container-fluid align-content-center">
+        <div class="container align-content-center">
+          <h2 class="text-center">
+            Introduction
+          </h2>
+          <p>
+            During the #metoo movement, there was significant conversation at my University about other forms of sex- or gender-based discrimination.  This included wage discrimination, and so I decided to investigate this.  Specifically, I set out to determine if the University offered equal pay for equal work, or whether women were paid less than their male colleagues in the same position.
+          </p>
+          <p>
+            Most models of wage discrimination fit a hyperplane to the data using multiple regression (OLS, GLS, etc.) and get something like this.
+            $$ Wage=β_0+β_1*Gender+β_2*Occupation+⋯+β_n*factor_n+ϵ $$
+            Here, we are looking to determine if the best model for our data includes the ‘Gender’ parameter.  I order to do this we will use Ordinary Least Squares regression as it is the lowest variance unbiased estimator (bias would be a problem for a study about bias).  
+            An important factor is trying to determine what variation in wage is due to discrimination and which is due to people of different genders making different choices; these choices might also be due to social inequity, but they are not the type of effect that we are studying. <br>
+          </p>
+
+          <h2 class="text-center">The Data</h2> 
+          <p>
+
+          </p>
+          <pre class="text-left">
+            <code>
+              # Ingest the eage data (transformed from pdf) 
+              salariesRawUngendered &lt- readxl::read_xlsx('C:/Users/kenne/Documents/GitHub/WageRegression/Data/UMS_PUBLICINFO_CLEANED.xlsx')
+
+              # change everything to lowercase for consistancy
+              salariesRawUngendered$Name_Unformatted &lt- sapply(salariesRawUngendered$Formatted_Name, tolower)
+            </code>
+          </pre>
+          <p>
+            This gives a dataframe that looks like this:
+          </p>
+          <div>
+            <!-- html table generated in R 4.0.0 by xtable 1.8-4 package -->
+            <!-- Mon Oct 05 16:44:05 2020 -->
+            <table class="table">
+              <tr> <th>  </th> <th> CMP </th> <th> Formatted_Name </th> <th> Dept ID </th> <th> Title </th> <th> Salbase </th> <th> JobSt </th> <th> Bargaining Unit </th> <th> Faculty Appt </th> <th> FTE </th> <th> Name_Unformatted </th>  </tr>
+                <tr> <td > 1 </td> <td> UM </td> <td> [Redacted] </td> <td> OME </td> <td> Laboratory Manager </td> <td > 61550.03 </td> <td> FR </td> <td> UMPSA </td> <td>  </td> <td > 1.00 </td> <td> [redacted] </td> </tr>
+                <tr> <td > 2 </td> <td> UM </td> <td> [Redacted] </td> <td> OECE </td> <td> Professor of ECE </td> <td > 132997.84 </td> <td> FR </td> <td> Non-Represented Faculty </td> <td> AY </td> <td > 1.00 </td> <td>[redacted]</td> </tr>
+                <tr> <td > 3 </td> <td> UM </td> <td> [Redacted]</td> <td> OFM </td> <td> Facilities Maint Worker CL1 </td> <td > 24024.00 </td> <td> FR </td> <td> Service and Maintenance </td> <td>  </td> <td > 1.00 </td> <td> [redacted]</td> </tr>
+                <tr> <td > 4 </td> <td> UM </td> <td>[Redacted] </td> <td> OMCSC </td> <td> Research Associate </td> <td > 28033.37 </td> <td> PR </td> <td> UMPSA </td> <td>  </td> <td > 0.50 </td> <td> [redacted]</td> </tr>
+                <tr> <td > 5 </td> <td> UM </td> <td> [Redacted] </td> <td> OEDUH </td> <td> Professor of Ed. Leadership </td> <td > 94996.20 </td> <td> FR </td> <td> AFUM </td> <td> AY </td> <td > 1.00 </td> <td>[redacted] </td> </tr>
+                <tr> <td > 6 </td> <td> UM </td> <td> [Redacted] </td> <td> OCITL </td> <td> Associate Director Inst Design </td> <td > 64260.00 </td> <td> FR </td> <td> UMPSA </td> <td>  </td> <td > 1.00 </td> <td> [redacted] </td> </tr>
+                </table>
+          </div>
+          <p>The different Columns of the dataframe have the follwing information:</p>
+          <dl class="row">
+            <dt class="col-sm-2">CMP</dt>
+            <dd class="col-sm-10">Campus - specifies which campus within the University system where the person works.</dd>
+            <dt class="col-sm-2">Formatted_Name</dt>
+            <dd class="col-sm-10">The name of the employee, formatted as normal.  I have redacted this for privacy reasons.</dd>
+            <dt class="col-sm-2">Dept ID</dt>
+            <dd class="col-sm-10">The part of the University where the employee works.</dd>
+            <dt class="col-sm-2">Salbase</dt>
+            <dd class="col-sm-10">The base salary of the employee, before bonuses.</dd>
+            <dt class="col-sm-2">Title</dt>
+            <dd class="col-sm-10">The job title</dd>
+            <dt class="col-sm-2">Barganing Unit</dt>
+            <dd class="col-sm-10">specifies which union contract they are bound by.</dd>
+            <dt class="col-sm-2">Faculty Appt</dt>
+            <dd class="col-sm-10">The duration and type of appointment for temporary employees (academic year vs calendar year, etc.).</dd>
+            <dt class="col-sm-2">FTE</dt>
+            <dd class="col-sm-10">"Full Time Equivalent", a value between 0 and 1 that specifies what percentage of full time the employee works. <br> This is 1 for full time employees, and lower for employees who work less hours. </dd>
+            <dt class="col-sm-2">Name_Unformatted</dt>
+            <dd class="col-sm-10">Name without formatting (all lower case).</dd>
+            <dt class="col-sm-2">JobSt</dt>
+            <dd class="col-sm-10">Not used.</dd>
+          </dl>
+
+          <p>
+            However, there is a problem.  There is no information about gender!  However, there are names, and that tells us a lot about a person.  I have redacted the names to maintain people's privacy, even though this data is publicly available. 
+          </p>
+          <p>
+            The US Census Bureau publishes name frequencies by gender.  Using that, we can estimate the gender of the employees.  With about 4000 employees, there are too many to label manually.  There is a problem here as well, since this assigns binary gender and does not consider transgender status.  In any case, this is a preliminary analysis, since a full analysis would require some additional information like age. 
+
+          </p>
+          <p>
+            To do this, we load the census data, and then convert all the names to lower case.
+          </p>
+          <pre>
+            <code>
+              #Load Census names data
+              censusNames &lt- read.csv('C:/Users/kenne/Documents/yob2018.txt', header=FALSE)
+
+              # Format Filter names by gender, then format to lowercase
+              female_names_capitalized &lt- censusNames %>%
+                filter(V2=='F')
+              female_names_lower &lt- sapply(female_names_capitalized, tolower)
+
+              male_names_capitalized &lt- censusNames %>%
+                filter(V2=='M')
+              male_names_lower &lt- sapply(male_names_capitalized, tolower)
+            </code>
+          </pre>
+          <p>
+            Now, in order to process the names, we need to separate the first and last names.  Once we have done that, we can iterate over the names and use them to assign genders.  Since we keep the numerical index of the from the original data frame when we create the Tibble, we can use that to assign genders to the original dataframe and match up the records.  Then, we iterate over the Tibble and save a gender to the Gender vector based on the index from the original data frame.    We also create a Tibble of bigrams (two-word pairs) from the job titles to clean that column later.
+          </p>
+          <pre>
+            <code>
+              # Convert names to a tibble for efficient processing with Tidytext
+              namedf &lt- tibble(employee=1:4643, name=salariesRawUngendered$Formatted_Name)
+
+              tidy_names &lt- namedf %>%  unnest_tokens(word,name)
+
+              # convert job titles also
+              titledf &lt- tibble(employee=1:4643, title=salariesRawUngendered$Title)
+
+              tidy_titles &lt- titledf %>%
+                unnest_tokens(word, title)
+
+              # also get bigrams for processing - the wage data has multiple keys for the same job titles
+              tidy_title_bigrams &lt- titledf %>%
+                unnest_tokens(word, title, token="ngrams", n=2)
+
+
+            </code>
+          </pre>
+          <p>
+            Now that we have the data in a Tibble for processing, we create some vectors to hold the data as it's processed.  Then, we can iterate of the names and assign genders.
+          </p>
+          <pre>
+            <code>
+              position &lt- vector(mode="character", length = 4643)
+              class &lt- vector(mode = "character", length = 4643)
+              Gender &lt- vector(mode="integer", length=4643)
+              jobTitle &lt- vector(mode="character", length = 4643)
+
+              # iterate over the names and assign a gender (female coded as 1, male 0)
+              for (i in 1:13523) {
+                if(tidy_names[i,"word"] %in% female_names_lower){
+                  index &lt- as.numeric(tidy_names[i,"employee"])
+                  Gender[index] &lt- "1"
+                }
+                if(tidy_names[i, "word"] %in% male_names_lower){
+                  index &lt- as.numeric(tidy_names[i,"employee"])
+                  Gender[[index]] &lt- "0"
+                }
+              }
+            </code>
+          </pre>
+          <p>
+            Now that this is done, we do the same thing with the job titles.  Looking at the full dataframe, there are a lot of abbreviations used, for example prof. for professor, assoc. for associate, etc.  We will make sure to use consistant language.  Furthermore, we want to group people by job title; splitting professors by subject area (as is done in the data to begin with) would create too many classes.  Instead, we create a new 'position' column that holds the job title in a consistant way.  
+          </p>
+          <pre>
+            <code>
+              # iterate over the titles to make the tokens consistant (i.e. consistantly use 'professor')
+              for (j in 1:16350){
+                if(tidy_titles[j,"word"]=="prof" || tidy_titles[j,"word"]=="professor" ){
+                  position[as.numeric(tidy_titles[j,"employee"])] &lt- "professor"
+                }
+                if(tidy_titles[j,"word"]=="dean" ){
+                  position[as.numeric(tidy_titles[j,"employee"])] &lt- "dean"
+                }
+                if(tidy_titles[j,"word"]=="president"){
+                  position[as.numeric(tidy_titles[j,"employee"])] &lt- "president"
+                }
+                if(tidy_titles[j,"word"]=="administrative"){
+                  position[as.numeric(tidy_titles[j,"employee"])] &lt- "admin"
+                }
+                if(tidy_titles[j,"word"]=="facilities" || tidy_titles[j,"word"]=="maint"){
+                  position[as.numeric(tidy_titles[j,"employee"])] &lt- "auxillary"
+                }
+                if(tidy_titles[j,"word"]=="coach"){
+                  position[as.numeric(tidy_titles[j,"employee"])] &lt- "professor"
+                }
+                if(tidy_titles[j,"word"]=="it"){
+                  position[as.numeric(tidy_titles[j,"employee"])] &lt- "information technology"
+                }
+                if(tidy_titles[j,"word"]=="assistant"){
+                  class[as.numeric(tidy_titles[j,"employee"])] &lt- "assistant"
+                }
+                if(tidy_titles[j,"word"]=="associate"){
+                  class[as.numeric(tidy_titles[j,"employee"])] &lt- "associate"
+                }
+                if(tidy_titles[j,"word"]=="lecturer"){
+                  position[as.numeric(tidy_titles[j,"employee"])] &lt- "lecturer"
+                }
+              }
+
+              # Iterate over bigrams to catch levels of professors (Assitant Professor &lt Associate Professor &lt Professor)
+              for (k in 1:11750){
+                if(!is.na(tidy_title_bigrams[k,"word"])){
+                  if(tidy_title_bigrams[k,"word"]=="assistant professor" ||
+                    tidy_title_bigrams[k,"word"]==" asst professor" ||
+                    tidy_title_bigrams[k,"word"]=="assistant prof"  ||
+                    tidy_title_bigrams[k,"word"]=="asst prof" ){
+                    position[as.numeric(tidy_titles[j,"employee"])] &lt- "assistant professor"
+                  }
+                  if(tidy_title_bigrams[k,"word"]=="associate professor" ||
+                    tidy_title_bigrams[k,"word"]==" assoc professor" ||
+                    tidy_title_bigrams[k,"word"]=="associate prof"  ||
+                    tidy_title_bigrams[k,"word"]=="assoc prof" ){
+                    position[as.numeric(tidy_titles[j,"employee"])] &lt- "associate professor"
+                  }
+                }
+              }
+            </code>
+          </pre>
+          <p>
+            Now that this is done, let's do some more exploratory data analysis.  Specifically, let's investigate the gender breakdown of the faculty and the average pay by gender.  
+          </p>
+
+
+          <div class="row">
+            <div class="col">
+              <img src="img\gender.svg">
+
+            </div>
+            <div class="col">
+              <img src="img\avg.svg">
+            </div>
+          </div>
+          <p>
+            There are clearly more male employees than female employees, and the average salary is higher for the male employees.  However, it is important not to jump to conclusions here.  Econometric models of wage descrimination stress the importance of accounting for all variables before making a judgement. Furthermore, just because there is a statistically significant (which is not clear without a test) diffrence in average wage does not mean that there is wage descrimination by the University.  It could reflect broader inequality within the society rather than descrimination by the employer, for example.
+          </p>
+          <pre>
+            <code>
+
+            </code>
+          </pre>
+
+          <h2 class="text-center">Linear Models</h2>
+          <p>
+            In order to investigate whether this difference amounts to descrimination, we use a linear model (OLS).  We fit the model and examine the output.  
+          </p>
+          <div class="pre-scrollable">
+            <!-- html table generated in R 4.0.0 by xtable 1.8-4 package -->
+            <!-- Mon Oct 05 15:46:39 2020 -->
+            <table class="table pre-scrollable">
+              <tr> <th> Parameter </th> <th> Estimate </th> <th> Std. Error </th> <th> t value </th> <th> Pr(&gt;|t|) </th>  </tr>
+                <tr> <td > (Intercept) </td> <td > 36724.6615 </td> <td > 3254.1881 </td> <td > 11.29 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > Gender </td> <td > -2588.5494 </td> <td > 576.5821 </td> <td > -4.49 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > FTE </td> <td > 51535.3865 </td> <td > 2480.1383 </td> <td > 20.78 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > CMPUM </td> <td > -4198.9725 </td> <td > 1104.1426 </td> <td > -3.80 </td> <td > 0.0001 </td> </tr>
+                <tr> <td > CMPUMA </td> <td > -11633.3158 </td> <td > 1467.5034 </td> <td > -7.93 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > CMPUMF </td> <td > -13753.9763 </td> <td > 1473.1686 </td> <td > -9.34 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > CMPUMFK </td> <td > -16040.7067 </td> <td > 2027.5735 </td> <td > -7.91 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > CMPUMM </td> <td > -17712.3395 </td> <td > 2440.5085 </td> <td > -7.26 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > CMPUMPI </td> <td > -13764.3662 </td> <td > 1845.8890 </td> <td > -7.46 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > CMPUSM </td> <td > -4997.9400 </td> <td > 1170.8076 </td> <td > -4.27 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > position admin </td> <td > 672.0285 </td> <td > 1289.0697 </td> <td > 0.52 </td> <td > 0.6022 </td> </tr>
+                <tr> <td > position assistant professor </td> <td > 11428.5582 </td> <td > 18444.7017 </td> <td > 0.62 </td> <td > 0.5355 </td> </tr>
+                <tr> <td > position auxillary </td> <td > -3222.6980 </td> <td > 1428.0882 </td> <td > -2.26 </td> <td > 0.0241 </td> </tr>
+                <tr> <td > position dean </td> <td > 32864.7746 </td> <td > 2695.2397 </td> <td > 12.19 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > position information technology </td> <td > -1474.6862 </td> <td > 3404.9219 </td> <td > -0.43 </td> <td > 0.6650 </td> </tr>
+                <tr> <td > position lecturer </td> <td > -23939.1534 </td> <td > 2220.7403 </td> <td > -10.78 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > position president </td> <td > 89734.6272 </td> <td > 4706.7902 </td> <td > 19.06 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > position professor </td> <td > 904.5542 </td> <td > 1732.4241 </td> <td > 0.52 </td> <td > 0.6016 </td> </tr>
+                <tr> <td > `Bargaining Unit` COLT </td> <td > -47701.5788 </td> <td > 2030.0415 </td> <td > -23.50 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > `Bargaining Unit` Law Faculty </td> <td > 22931.7772 </td> <td > 4414.6873 </td> <td > 5.19 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > `Bargaining Unit` Non-Represented Faculty </td> <td > 13583.0322 </td> <td > 1803.6224 </td> <td > 7.53 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > `Bargaining Unit` Non-Represented Hourly </td> <td > -47199.1465 </td> <td > 3087.7643 </td> <td > -15.29 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > `Bargaining Unit` Non-Represented Salaried </td> <td > 2019.2684 </td> <td > 1979.2898 </td> <td > 1.02 </td> <td > 0.3077 </td> </tr>
+                <tr> <td > `Bargaining Unit` Part-Time Faculty </td> <td > -19147.2466 </td> <td > 4925.2050 </td> <td > -3.89 </td> <td > 0.0001 </td> </tr>
+                <tr> <td > `Bargaining Unit` Police </td> <td > -42667.4935 </td> <td > 3255.3181 </td> <td > -13.11 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > `Bargaining Unit` Service and Maintenance </td> <td > -49246.0059 </td> <td > 2078.4635 </td> <td > -23.69 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > `Bargaining Unit` UMPSA </td> <td > -32062.5663 </td> <td > 1765.7640 </td> <td > -18.16 </td> <td > 0.0000 </td> </tr>
+                <tr> <td > `Bargaining Unit` University Supervisors </td> <td > -38098.2968 </td> <td > 2582.2155 </td> <td > -14.75 </td> <td > 0.0000 </td> </tr>
+                </table>
+                  </div>
+
+                  <p>
+                    It certainly appears that there is wage descrimination.  However, there may be some additional variables in the analysis.  There are some variables that are not statistically significant predictors of wage.  In order to continue, we will go through the model selection process.  
+                  </p>
+                  <p>
+                    We note that the Akaike Information Criterion (AIC) is about 104,380.  This is enormous, and much larger than we would expect, though the value is highly dependent on the data and quite variable.  We will remove variables to minimize the AIC, and start with the variables with the highest p-value.  Repeating this for six interations, we are able to reduce the AIC to 57457.61, and we start to see a different picture.  
+                  </p>
+
+                  <div class="pre-scrollable">
+                    <!-- html table generated in R 4.0.0 by xtable 1.8-4 package -->
+                  <!-- Mon Oct 05 15:47:18 2020 -->
+                  <table class="table">
+                    <tr> <th> Parameter </th> <th> Estimate </th> <th> Std. Error </th> <th> t value </th> <th> Pr(&gt;|t|) </th>  </tr>
+                      <tr> <td > (Intercept) </td> <td > 33094.8140 </td> <td > 2707.7531 </td> <td > 12.22 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > Gender </td> <td > -552.8114 </td> <td > 460.3525 </td> <td > -1.20 </td> <td > 0.2299 </td> </tr>
+                      <tr> <td > FTE </td> <td > 44338.6502 </td> <td > 2088.7988 </td> <td > 21.23 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > CMPUM </td> <td > -6072.9481 </td> <td > 853.3640 </td> <td > -7.12 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > CMPUMA </td> <td > -9498.5438 </td> <td > 1190.5495 </td> <td > -7.98 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > CMPUMF </td> <td > -8965.0614 </td> <td > 1204.9466 </td> <td > -7.44 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > CMPUMFK </td> <td > -13197.9704 </td> <td > 1628.4442 </td> <td > -8.10 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > CMPUMM </td> <td > -13925.3776 </td> <td > 2038.2981 </td> <td > -6.83 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > CMPUMPI </td> <td > -11770.3235 </td> <td > 1514.1858 </td> <td > -7.77 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > CMPUSM </td> <td > -5561.1069 </td> <td > 910.5734 </td> <td > -6.11 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > position auxillary </td> <td > -4099.1127 </td> <td > 889.2076 </td> <td > -4.61 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > position dean </td> <td > 19798.5846 </td> <td > 2760.9214 </td> <td > 7.17 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > position lecturer </td> <td > -14084.7338 </td> <td > 1726.0019 </td> <td > -8.16 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > `Bargaining Unit` COLT </td> <td > -38214.5579 </td> <td > 1681.6585 </td> <td > -22.72 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > `Bargaining Unit` Non-Represented Faculty </td> <td > 37185.8710 </td> <td > 2371.2899 </td> <td > 15.68 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > `Bargaining Unit` Non-Represented Hourly </td> <td > -37512.8320 </td> <td > 3146.8953 </td> <td > -11.92 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > `Bargaining Unit` Part-Time Faculty </td> <td > -14075.6160 </td> <td > 4378.7289 </td> <td > -3.21 </td> <td > 0.0013 </td> </tr>
+                      <tr> <td > `Bargaining Unit` Police </td> <td > -31892.9929 </td> <td > 2259.8202 </td> <td > -14.11 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > `Bargaining Unit` Service and Maintenance </td> <td > -37715.0196 </td> <td > 1689.0865 </td> <td > -22.33 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > `Bargaining Unit` UMPSA </td> <td > -21633.4215 </td> <td > 1565.8077 </td> <td > -13.82 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > `Bargaining Unit` University Supervisors </td> <td > -26047.9586 </td> <td > 2043.7588 </td> <td > -12.75 </td> <td > 0.0000 </td> </tr>
+                      <tr> <td > `Bargaining Unit` NA </td> <td > -21872.3173 </td> <td > 11191.1909 </td> <td > -1.95 </td> <td > 0.0508 </td> </tr>
+                      </table>
+                    </div>
+                    <p>
+                      The effect of Gender on the Model is no longer statistically significant.  This means that we can remove it from our model!  In fact, removing it decreases the AIC just slightly, to 57457.06.  This is a small change, but a decrease nonetheless. This means that there is insufficient evidence to conclude that the University is descriminating based on gender.  A classic case of Simpson's Paradox!
+                    </p>
+
+                    
+                    <div  class="pre-scrollable">
+                      <!-- html table generated in R 4.0.0 by xtable 1.8-4 package -->
+                      <!-- Mon Oct 05 15:49:01 2020 -->
+                      <table class="table">
+                        <tr> <th> Parameter </th> <th> Estimate </th> <th> Std. Error </th> <th> t value </th> <th> Pr(&gt;|t|) </th>  </tr>
+                          <tr> <td > (Intercept) </td> <td > 32826.4770 </td> <td > 2698.7416 </td> <td > 12.16 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > FTE </td> <td > 44466.5280 </td> <td > 2086.2562 </td> <td > 21.31 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > CMPUM </td> <td > -6149.8363 </td> <td > 851.0294 </td> <td > -7.23 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > CMPUMA </td> <td > -9617.3597 </td> <td > 1186.5296 </td> <td > -8.11 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > CMPUMF </td> <td > -9064.0468 </td> <td > 1202.2238 </td> <td > -7.54 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > CMPUMFK </td> <td > -13238.1690 </td> <td > 1628.2356 </td> <td > -8.13 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > CMPUMM </td> <td > -14019.2314 </td> <td > 2036.9687 </td> <td > -6.88 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > CMPUMPI </td> <td > -11821.1047 </td> <td > 1513.7212 </td> <td > -7.81 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > CMPUSM </td> <td > -5665.8895 </td> <td > 906.4584 </td> <td > -6.25 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > position auxillary </td> <td > -4025.3280 </td> <td > 887.1560 </td> <td > -4.54 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > position dean </td> <td > 19708.8229 </td> <td > 2760.1391 </td> <td > 7.14 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > position lecturer </td> <td > -14094.5879 </td> <td > 1726.1261 </td> <td > -8.17 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > `Bargaining Unit` COLT </td> <td > -38272.3415 </td> <td > 1681.1099 </td> <td > -22.77 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > `Bargaining Unit` Non-Represented Faculty </td> <td > 37218.3418 </td> <td > 2371.3331 </td> <td > 15.70 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > `Bargaining Unit` Non-Represented Hourly </td> <td > -37540.9690 </td> <td > 3147.0700 </td> <td > -11.93 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > `Bargaining Unit` Part-Time Faculty </td> <td > -14089.8209 </td> <td > 4379.0774 </td> <td > -3.22 </td> <td > 0.0013 </td> </tr>
+                          <tr> <td > `Bargaining Unit` Police </td> <td > -31771.3469 </td> <td > 2257.7365 </td> <td > -14.07 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > `Bargaining Unit` Service and Maintenance </td> <td > -37630.6672 </td> <td > 1687.7657 </td> <td > -22.30 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > `Bargaining Unit` UMPSA </td> <td > -21644.6485 </td> <td > 1565.9102 </td> <td > -13.82 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > `Bargaining Unit` University Supervisors </td> <td > -25964.5216 </td> <td > 2042.7474 </td> <td > -12.71 </td> <td > 0.0000 </td> </tr>
+                          <tr> <td > `Bargaining Unit` NA </td> <td > -21627.0755 </td> <td > 11190.2588 </td> <td > -1.93 </td> <td > 0.0534 </td> </tr>
+                          </table>
+                    </div>
+
+
+        </div>
+        </div>
+    </section>
+        
+
+
+
+       <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Math Jax-->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+  <!-- Custom scripts for this template -->
+  <script src="js/stylish-portfolio.min.js"></script>
+
+    </body>
+</html>
