@@ -96,10 +96,13 @@ function selectColumn(col) {
 //It should then check if after placing the token the game continues or if the player has aligned 4 tokens.
  //Finally it should check if the grid is full (Game ends on a draw!) 
     
+    if(player == 1){
+
+    player = 2;
 
     let play_row = rows - row_counts[col];
 
-    player = 1;
+
 
     grid[play_row][col]=1;
     player=2;
@@ -110,6 +113,7 @@ function selectColumn(col) {
 
     refreshGrid();
     console.log(grid)
+    
 
     let game_over = false;
     game_winner = checkWinner();
@@ -141,7 +145,7 @@ function selectColumn(col) {
     .catch(error => console.error(error));  
   }
 
-
+    }
   
   //refreshGrid();
 };
@@ -169,6 +173,7 @@ function resetGrid() {
 
   game_over = false;
   game_winner = null;
+  player = 1;
   document.getElementById("colorTurn").innerHTML="Player Turn";
 
   grid = [
