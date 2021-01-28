@@ -129,7 +129,7 @@ h6 {
   height: 100%;
   transition: all 0.4s ease 0s;
   transform: translateX(250px);
-  background: rgba(25, 60, 64, 0.9);
+  background: #14487e;
   border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -218,19 +218,20 @@ h6 {
 }
 
 .callout {
-  padding: 15rem 0;
+  padding: 7rem 0;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("../img/bg-callout.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 467px;
+  height: 500px;
 }
 
 .callout h2 {
   font-size: 3.5rem;
   font-weight: 700;
   display: block;
-  max-width: 40rem;
+  max-width: 80rem;
+  margin-top: 0px;
 }
 
 .portfolio-item {
@@ -297,9 +298,14 @@ h6 {
     clip-path: inset(2rem);
   }
   .portfolio-item:hover .caption {
-    background-color: rgba(25, 60, 64, 0.9);
+    background-color: #14487e;
     -webkit-clip-path: inset(2rem);
     clip-path: inset(2rem);
+    opacity: 100%;
+    transition: opacity 0.25s;
+  }
+  .portfolio-item .caption {
+    opacity: 0;
   }
 }
 
@@ -320,27 +326,27 @@ footer.footer .social-link {
   width: 4rem;
   line-height: 4.3rem;
   font-size: 1.5rem;
-  background-color: rgba(25, 60, 64, 0.9);
+  background-color: #14487e;
   transition: background-color 0.15s ease-in-out;
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 footer.footer .social-link:hover {
-  background-color: #155d74;
+  background-color: #14487e;
   text-decoration: none;
 }
 
 a {
-  color: #1D809F;
+  color: #14487e;
 }
 
 a:hover, a:focus, a:active {
-  color: #155d74;
+  color: #102d4d;
 }
 
 .btn-primary {
-  background-color: rgba(25, 60, 64, 0.9)!important;
-  border-color: rgba(25, 60, 64, 0.9) !important;
+  background-color: #14487e!important;
+  border-color: #14487e !important;
   color: #fff !important;
 }
 
@@ -370,11 +376,11 @@ a:hover, a:focus, a:active {
 }
 
 .bg-primary {
-  background-color: rgba(25, 60, 64, 0.9) !important;
+  background-color: #14487e !important;
 }
 
 .text-primary {
-  color: rgba(25, 60, 64, 0.9) !important;
+  color: #14487e !important;
 }
 
 .text-secondary {
@@ -393,7 +399,7 @@ a:hover, a:focus, a:active {
   width: 775px;
   height: 700px;
   padding: 10px;
-  background:  rgba(25, 60, 64, 0.9);
+  background:  #14487e;
   border: 1px solid #0044AA;
   border-radius: 5px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);

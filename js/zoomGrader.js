@@ -13,7 +13,7 @@ function createMasterList(list, tokens){
     // returns master list from an array of names.  Formatted for a reduce operation.
 }
 
-function colateAttendance(masterList, names, emails, attendance){
+function collateAttendance(masterList, names, attendance){
     // Takes all of the information from the loaded file, and then adds them to the master list
 
 }
@@ -23,7 +23,7 @@ function run(files){
     var data  = loadfiles();
     var cleaned_data  = cleanZoomData(data);
     let masterList = [];
-    masterlist = 
+    masterlist = collateAttendance()
 
 }
 

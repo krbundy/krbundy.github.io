@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Kenneth Bundy - Play Connect-4</title>
+        <title>Kenneth Bundy - Portfolio</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
        
@@ -50,8 +50,8 @@
         <div class="container text-center">
         <div class="row">
             <div class="col-lg-10 mx-auto">
-            <h1 style="color:white !important" >Wage Descrimination<br>
-              <small>Does my University Descriminate against Female Employees?</small>
+            <h1 style="color:white !important" >Wage Discrimination<br>
+              <small>Does my University Discriminate against Female Employees?</small>
             </h1>
             </div>
         </div>
@@ -85,10 +85,10 @@
           </p>
           <pre class="text-left">
             <code>
-              # Ingest the eage data (transformed from pdf) 
+              # Ingest the age data (transformed from pdf) 
               salariesRawUngendered &lt- readxl::read_xlsx('C:/Users/kenne/Documents/GitHub/WageRegression/Data/UMS_PUBLICINFO_CLEANED.xlsx')
 
-              # change everything to lowercase for consistancy
+              # change everything to lowercase for consistency
               salariesRawUngendered$Name_Unformatted &lt- sapply(salariesRawUngendered$Formatted_Name, tolower)
             </code>
           </pre>
@@ -120,7 +120,7 @@
             <dd class="col-sm-10">The base salary of the employee, before bonuses.</dd>
             <dt class="col-sm-2">Title</dt>
             <dd class="col-sm-10">The job title</dd>
-            <dt class="col-sm-2">Barganing Unit</dt>
+            <dt class="col-sm-2">Bargaining Unit</dt>
             <dd class="col-sm-10">specifies which union contract they are bound by.</dd>
             <dt class="col-sm-2">Faculty Appt</dt>
             <dd class="col-sm-10">The duration and type of appointment for temporary employees (academic year vs calendar year, etc.).</dd>
@@ -204,11 +204,11 @@
             </code>
           </pre>
           <p>
-            Now that this is done, we do the same thing with the job titles.  Looking at the full dataframe, there are a lot of abbreviations used, for example prof. for professor, assoc. for associate, etc.  We will make sure to use consistant language.  Furthermore, we want to group people by job title; splitting professors by subject area (as is done in the data to begin with) would create too many classes.  Instead, we create a new 'position' column that holds the job title in a consistant way.  
+            Now that this is done, we do the same thing with the job titles.  Looking at the full dataframe, there are a lot of abbreviations used, for example prof. for professor, assoc. for associate, etc.  We will make sure to use consistent language.  Furthermore, we want to group people by job title; splitting professors by subject area (as is done in the data to begin with) would create too many classes.  Instead, we create a new 'position' column that holds the job title in a consistent way.  
           </p>
           <pre>
             <code>
-              # iterate over the titles to make the tokens consistant (i.e. consistantly use 'professor')
+              # iterate over the titles to make the tokens consistent (i.e. consistently use 'professor')
               for (j in 1:16350){
                 if(tidy_titles[j,"word"]=="prof" || tidy_titles[j,"word"]=="professor" ){
                   position[as.numeric(tidy_titles[j,"employee"])] &lt- "professor"
@@ -242,7 +242,7 @@
                 }
               }
 
-              # Iterate over bigrams to catch levels of professors (Assitant Professor &lt Associate Professor &lt Professor)
+              # Iterate over bigrams to catch levels of professors (Assistant Professor &lt Associate Professor &lt Professor)
               for (k in 1:11750){
                 if(!is.na(tidy_title_bigrams[k,"word"])){
                   if(tidy_title_bigrams[k,"word"]=="assistant professor" ||
@@ -276,7 +276,7 @@
             </div>
           </div>
           <p>
-            There are clearly more male employees than female employees, and the average salary is higher for the male employees.  However, it is important not to jump to conclusions here.  Econometric models of wage descrimination stress the importance of accounting for all variables before making a judgement. Furthermore, just because there is a statistically significant (which is not clear without a test) diffrence in average wage does not mean that there is wage descrimination by the University.  It could reflect broader inequality within the society rather than descrimination by the employer, for example.
+            There are clearly more male employees than female employees, and the average salary is higher for the male employees.  However, it is important not to jump to conclusions here.  Econometric models of wage discrimination stress the importance of accounting for all variables before making a judgement. Furthermore, just because there is a statistically significant (which is not clear without a test) difference in average wage does not mean that there is wage discrimination by the University.  It could reflect broader inequality within the society rather than discrimination by the employer, for example.
           </p>
           <p>
             The wage data, shown below, looks very skewed.  After taking the logarithm of the data, there data looks much more symmetric.  In fact, regressing against \(\ln(wage)\) is the standard econometric model (as used in, for example, <a href="https://link.gale.com/apps/doc/A534490213/AONE?u=maine_orono&sid=AONE&xid=e8b2cfa5">this analysis from the Max Planck Institute</a>)
@@ -298,7 +298,7 @@
 
           <h2 class="text-center">Linear Models</h2>
           <p>
-            In order to investigate whether this difference amounts to descrimination, we use a linear model (OLS).  We fit the model and examine the output.  This model uses the available data to predict \(\ln(wage)\).
+            In order to investigate whether this difference amounts to discrimination, we use a linear model (OLS).  We fit the model and examine the output.  This model uses the available data to predict \(\ln(wage)\).
           </p>
 
           <div class="pre-scrollable">
@@ -337,10 +337,10 @@
             </table>
           </div>
           <p>
-            It certainly appears that there is wage descrimination.  However, there may be some additional variables in the analysis.  There are some variables that are not statistically significant predictors of wage.  In order to continue, we will go through the model selection process.  
+            It certainly appears that there is wage discrimination.  However, there may be some additional variables in the analysis.  There are some variables that are not statistically significant predictors of wage.  In order to continue, we will go through the model selection process.  
           </p>
           <p>
-            We note that the Akaike Information Criterion (AIC) is about 335.  We will remove variables to minimize the AIC, and start with the variables with the highest p-value.  Repeating this for six interations, we are able to reduce the AIC to 76, and we have all statistically significant parameters.  Unfortunately, it appears that the gender parameter is indeed statistically significant. 
+            We note that the Akaike Information Criterion (AIC) is about 335.  We will remove variables to minimize the AIC, and start with the variables with the highest p-value.  Repeating this for six iterations, we are able to reduce the AIC to 76, and we have all statistically significant parameters.  Unfortunately, it appears that the gender parameter is indeed statistically significant. 
           </p>
           <div class="pre-scrollable">
             <!-- html table generated in R 4.0.0 by xtable 1.8-4 package -->
@@ -374,7 +374,7 @@
           </div>
 
           <p>
-            However, this does not guarantee that there is wage descrimination.  There are other ommitted variables that would be necessary to determine whether there is descrimination for certain.  Perhaps the most important of these would be education level (for example, there may be fewer female Ph.D.-level professionals and more female administrative assistants) and years of experience (are female faculty younger, on average?).  However, this suggests that the issue is worth investigating.  
+            However, this does not guarantee that there is wage discrimination.  There are other omitted variables that would be necessary to determine whether there is discrimination for certain.  Perhaps the most important of these would be education level (for example, there may be fewer female Ph.D.-level professionals and more female administrative assistants) and years of experience (are female faculty younger, on average?).  However, this suggests that the issue is worth investigating.  
           </p>
           <p>
             It is indeed possible that the statistical significance of the gender parameter disappears when we control for another variable.  In fact, if we were to complete this analysis without using a log-transform, that is exactly what happens.  Our initial regression model shows this:
