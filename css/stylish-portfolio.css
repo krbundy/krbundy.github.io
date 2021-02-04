@@ -429,6 +429,7 @@ a:hover, a:focus, a:active {
 
 .jumbotron {
   background: url("../img/bg-jumbotron.jpg");
+  opacity: 0.9;
   position: relative;
   display: table;
   width: 100%;
